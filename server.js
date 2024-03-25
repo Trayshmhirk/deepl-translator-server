@@ -1,13 +1,17 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
 const app = express();
 const PORT = 3000;
-const DEEPL_API_KEY = process.env.DEEPL_API_KEY;
+const DEEPL_API_KEY = process.env.DEEPL_API_KEY; // Load API key from environment variable
 
 app.use(bodyParser.json());
+
+// Enable CORS middleware
+app.use(cors());
 
 app.get("/", (req, res) => {
    res.sendFile(path.join(__dirname, "index.html"));
