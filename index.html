@@ -29,7 +29,7 @@
          function translateContent() {
             var selectedLanguage =
                document.getElementById("languageSelector").value;
-            fetch("/translate", {
+            fetch("https://deepl-translator-server.onrender.com/translate", {
                method: "POST",
                headers: {
                   "Content-Type": "application/json",

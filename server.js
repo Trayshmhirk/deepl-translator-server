@@ -21,6 +21,9 @@ app.post("/translate", async (req, res) => {
    const { content, targetLanguage } = req.body;
 
    try {
+      // Ensure content is an array
+      const contentArray = Array.isArray(content) ? content : [content];
+
       const response = await fetch(
          `https://api.deepl.com/v2/translate?auth_key=${DEEPL_API_KEY}`,
          {
@@ -29,7 +32,7 @@ app.post("/translate", async (req, res) => {
                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-               text: [content], // Wrap the content in an array
+               text: contentArray, // Wrap the content in an array
                target_lang: targetLanguage,
             }),
          }
@@ -38,7 +41,11 @@ app.post("/translate", async (req, res) => {
       const data = await response.json();
 
       if (data.translations && data.translations.length > 0) {
-         res.json({ translatedText: data.translations[0].text });
+         // Map the translations back to the original content order
+         const translatedText = data.translations.map(
+            (translation) => translation.text
+         );
+         res.json({ translatedText });
       } else {
          res.status(500).json({ error: "Translation failed" });
       }
