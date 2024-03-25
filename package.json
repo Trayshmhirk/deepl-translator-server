@@ -1,0 +1,17 @@
+{
+  "name": "bubble-plugin",
+  "version": "1.0.0",
+  "description": "plugin",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1"
+  }
+}
